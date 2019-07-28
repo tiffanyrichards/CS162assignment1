@@ -1,9 +1,14 @@
 #include <iostream>
 using namespace std;
 
+const int MAX = 10;
+
 int main() {
 	int choice = 0;
-	
+	string itemName[MAX] = {};
+	double itemPrice[MAX] = {0};
+	char choice2 = '\n';
+
 	while (choice != 2) {
 
 		cout << "Main menu:" << endl;
@@ -12,10 +17,35 @@ int main() {
 		cout << "2. Exit\n";
 		cout << "Enter choice: ";
 
-	cin >> choice;
+		cin >> choice;
+		if (choice == 2) {
+			break;
+		}
+
+		for (int i = 0; i < MAX && choice2 != 'n'; i++) {
+			cout << "Enter the name of your item: ";
+			cin >> itemName[i];
+			cout << "Enter the price of your item: ";
+			cin >> itemPrice[i];
+			while (isalpha(itemPrice[i])) {
+				cout << "Invalid price input - try again: " << endl;
+				cin >> itemPrice[i];
+			}	
+
+			cout << "Would you like to enter another item? (y/n): ";
+			cin >> choice2;
+			while (choice2 != 'y' && choice2 != 'n') {
+				cout << "Invalid input" << endl;
+				cout << "Would you like to enter another item? (y/n): ";
+				cin >> choice2;
+			}		
+	
+		}
+		choice2 = 'y';		
+
 	}
 
-	cout << "Goodbye!";
+	cout << "\nGoodbye!" << endl;
 	
 	return 0;
 }
